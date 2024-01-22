@@ -44,3 +44,15 @@ spec:
         - containerPort: 80
           name: nginx-port
           protocol: TCP
+        volumeMounts: # Pod上にマウントするファイルを定義
+        - name: nginx-html-file # マウントしたいvolumeを指定
+          mountPath: /usr/share/nginx/html/index.html # 配置するパスを指定(Nginxのデフォルトの公開ディレクトリは/usr/share/nginx/html)
+          subPath: index.html # マウントするファイル名を指定
+          readOnly: true
+      volumes: # マウントしたいリソースを定義
+        - name: nginx-html-file # Podにマウントするvolumeを定義
+          configMap:
+            name: nginx-html # 使用するConfigMapリソースを指定
+            items: # ConfigMapリソースで定義した、どのファイルを使用するか指定する
+            - key: "index.html"
+              path: "index.html"
