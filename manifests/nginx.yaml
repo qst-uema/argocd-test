@@ -5,6 +5,7 @@ metadata:
     app: nginx-app
     name: nginx
   name: nginx-service
+  namespace: default
 spec:
   selector:
     app: nginx-app
@@ -23,6 +24,7 @@ metadata:
     app: nginx-app
     name: nginx
   name: nginx
+  namespace: default
 spec:
   replicas: 1
   selector:
